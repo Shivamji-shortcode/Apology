@@ -166,6 +166,36 @@
       margin-bottom: 0;
     }
 
+    /* Infinite Love Page Styling */
+    .infinity-symbol {
+      font-size: 72px;
+      color: var(--primary);
+      line-height: 1;
+      margin: 6px 0;
+      animation: floatInf 2.2s infinite ease-in-out;
+      display: inline-block;
+      text-shadow: 0 0 20px rgba(255, 42, 95, 0.6);
+    }
+    @keyframes floatInf {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.1); }
+    }
+    .love-meter {
+      background: #fff0f3;
+      border: 2px dashed #ff4d6d;
+      border-radius: 20px;
+      padding: 16px 14px;
+      margin: 14px 0 18px;
+    }
+    .counter-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 0.5px;
+      margin: 6px 0;
+      font-family: monospace, sans-serif;
+    }
+
     /* Promises Box */
     .promises-list {
       text-align: left;
@@ -331,13 +361,32 @@
           <p>May this festival bring you endless laughter, warmth, gorgeous traditional outfits, and sweet moments. You are the brightest light in my life, Kuchu.</p>
         </div>
 
-        <p>Before the celebrations begin, there is something very heartfelt I need to say to you...</p>
-        <button class="btn btn-yes" onclick="goToScreen(3)">Read My Apology ➔</button>
+        <p>Before we move forward, there is a universal calculation you need to see...</p>
+        <button class="btn btn-yes" onclick="goToScreen(3)">Check The Calculation ➔</button>
       </div>
     </div>
 
-    <!-- SCREEN 3: HEARTFELT DIWALI APOLOGY -->
+    <!-- SCREEN 3: I LOVE YOU INFINITE TIMES PAGE (NEW) -->
     <div id="screen3" class="screen">
+      <div class="card">
+        <span class="badge">♾️ SCIENTIFICALLY CALCULATED ♾️</span>
+        <h1>I Love You, Kuchu...</h1>
+        <div class="infinity-symbol">∞</div>
+        
+        <div class="love-meter">
+          <p style="font-size: 13px; font-weight: 700; margin-bottom: 2px; color: #a10028;">How many times do I love you?</p>
+          <div id="counter" class="counter-value">999,999,999+</div>
+          <p style="font-size: 14.5px; font-weight: 800; color: var(--primary); margin-bottom: 0;">Infinite Times & Beyond ❤️</p>
+        </div>
+
+        <p style="font-size: 14px;">Even if I wrote it down every second of every day on every diya in the world, it would still not be enough to show how much I love you.</p>
+        
+        <button class="btn btn-yes" onclick="goToScreen(4)">Read My Apology ➔</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: HEARTFELT DIWALI APOLOGY (UPDATED) -->
+    <div id="screen4" class="screen">
       <div class="card">
         <div style="font-size: 50px; margin-bottom: 8px;">🥺🪔💔</div>
         <h1>I'm So Sorry For Upsetting You</h1>
@@ -358,12 +407,12 @@
           </div>
         </div>
 
-        <button class="btn btn-yes" onclick="goToScreen(4)">See Kuchu's Diwali Treats ➔</button>
+        <button class="btn btn-yes" onclick="goToScreen(5)">See Kuchu's Diwali Treats ➔</button>
       </div>
     </div>
 
-    <!-- SCREEN 4: DIWALI SPECIAL TREATS & COUPONS -->
-    <div id="screen4" class="screen">
+    <!-- SCREEN 5: DIWALI SPECIAL TREATS & COUPONS -->
+    <div id="screen5" class="screen">
       <div class="card">
         <span class="badge">🎁 Kuchu's Diwali Special Treats</span>
         <h1>Peace Treats For Kuchu</h1>
@@ -378,12 +427,12 @@
           <div class="treat-card" onclick="claimTreat(this, 'Full-Day Queen Treatment & Pampering')">💆 Zero-Questions Pamper</div>
         </div>
 
-        <button class="btn btn-yes" onclick="goToScreen(5)">One Last Question ➔</button>
+        <button class="btn btn-yes" onclick="goToScreen(6)">One Last Question ➔</button>
       </div>
     </div>
 
-    <!-- SCREEN 5: RUNAWAY NO BUTTON -->
-    <div id="screen5" class="screen">
+    <!-- SCREEN 6: RUNAWAY NO BUTTON -->
+    <div id="screen6" class="screen">
       <div class="card">
         <div style="font-size: 50px; margin-bottom: 8px;">👉👈</div>
         <h1>Can You Forgive Me This Diwali, Kuchu?</h1>
@@ -396,12 +445,12 @@
       </div>
     </div>
 
-    <!-- SCREEN 6: CELEBRATION & WHATSAPP ACTION -->
-    <div id="screen6" class="screen">
+    <!-- SCREEN 7: CELEBRATION & WHATSAPP ACTION -->
+    <div id="screen7" class="screen">
       <div class="card">
         <div style="font-size: 58px; margin-bottom: 8px;">🎆🪔💖🎉</div>
         <h1>Happy Diwali, My Kuchu!</h1>
-        <p>Thank you for forgiving me! You just lit up my whole Diwali. I love you so much and promise to bring you only happiness!</p>
+        <p>Thank you for forgiving me! You just lit up my whole Diwali. I love you infinite times and promise to bring you only happiness!</p>
         <div id="claimedSummary" style="font-size: 13px; background: #fff8f0; padding: 12px; border-radius: 14px; margin-bottom: 14px; text-align: left; line-height: 1.5; border: 1px solid #ffd8a8;"></div>
         <a id="whatsappShare" href="#" class="wa-button">Send "Happy Diwali & I Forgive You" 💬</a>
       </div>
@@ -411,6 +460,7 @@
   <script>
     const claimedTreats = [];
     let dodgeCount = 0;
+    let counterInterval = null;
     const pleaTexts = [
       "No staying angry on Diwali! 🥺",
       "Kuchu please! Look at how sorry I am... 💔",
@@ -495,12 +545,27 @@
       } catch (e) {}
     }
 
+    function startLoveCounter() {
+      const counterEl = document.getElementById('counter');
+      if (counterInterval) clearInterval(counterInterval);
+      counterInterval = setInterval(() => {
+        const rand = Math.floor(Math.random() * 900000000 + 100000000);
+        counterEl.innerText = rand.toLocaleString() + "+";
+      }, 70);
+    }
+
     function goToScreen(num) {
       playChime(523.25, 0.2);
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen' + num).classList.add('active');
 
-      if (num === 5) {
+      if (num === 3) {
+        startLoveCounter();
+      } else if (counterInterval) {
+        clearInterval(counterInterval);
+      }
+
+      if (num === 6) {
         initSmartDodge();
       }
     }
@@ -583,14 +648,14 @@
     }
 
     function celebrate() {
-      goToScreen(6);
+      goToScreen(7);
       playChime(880, 0.5);
 
       for (let i = 0; i < 6; i++) {
         createFirework(Math.random() * canvas.width, Math.random() * (canvas.height * 0.5));
       }
 
-      let text = "Happy Diwali! 🪔✨ Okay fine, I forgive you! ❤️\n\nI, Kuchu, claimed these Diwali treats from you:\n" + 
+      let text = "Happy Diwali! 🪔✨ Okay fine, I forgive you! ❤️\n\nI love you Infinite Times too! I claimed these Diwali treats from you:\n" + 
         (claimedTreats.length > 0 ? claimedTreats.map(i => "• " + i).join("\n") : "• Unlimited warm cuddles & Diwali sweets!");
       
       const waLink = "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
@@ -608,7 +673,7 @@
     function createConfetti() {
       const conf = document.createElement('div');
       conf.classList.add('confetti-piece');
-      conf.innerText = ['🪔', '✨', '💛', '💖', '🎉', '🍬', '🎆'][Math.floor(Math.random() * 7)];
+      conf.innerText = ['🪔', '✨', '💛', '💖', '🎉', '🍬', '🎆', '♾️'][Math.floor(Math.random() * 8)];
       conf.style.left = Math.random() * 100 + 'vw';
       conf.style.top = '-20px';
       conf.style.fontSize = (Math.random() * 18 + 16) + 'px';

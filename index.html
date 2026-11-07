@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>I am so sorry ❤️</title>
+  <style>
+    :root {
+      --bg: #fff0f3;
+      --primary: #ff4d6d;
+      --primary-dark: #c9184a;
+      --card-bg: #ffffff;
+      --text: #590d22;
+      --accent: #ffb3c1;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: radial-gradient(circle at top, #ffe5ec, #ffb3c1);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text);
+      overflow-x: hidden;
+      padding: 16px;
+    }
+    .container {
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+    }
+    .screen {
+      display: none;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    .screen.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      padding: 30px 22px;
+      box-shadow: 0 16px 40px rgba(255, 77, 109, 0.18);
+      border: 2px solid #fff;
+      text-align: center;
+      position: relative;
+    }
+    h1 {
+      font-size: 26px;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: #722638;
+      margin-bottom: 18px;
+    }
+
+    /* Screen 1: Envelope */
+    .envelope-box {
+      cursor: pointer;
+      margin: 30px auto;
+      width: 190px;
+      height: 130px;
+      background: #ff758f;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 12px 28px rgba(201, 24, 74, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    .envelope-box:hover, .envelope-box:active {
+      transform: scale(1.05);
+    }
+    .wax-seal {
+      width: 54px;
+      height: 54px;
+      background: radial-gradient(circle, #ff0054, #800f2f);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      animation: pulse 1.6s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Screen 2: Mascot & Vouchers */
+    .bear-avatar {
+      font-size: 64px;
+      margin-bottom: 8px;
+      display: inline-block;
+      animation: sway 2.5s infinite ease-in-out;
+    }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+    .vouchers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .voucher {
+      background: #fff;
+      border: 1.5px dashed var(--primary);
+      border-radius: 14px;
+      padding: 12px 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .voucher.claimed {
+      background: #ffe3e8;
+      border-style: solid;
+      transform: scale(0.97);
+    }
+
+    /* Screen 3: Runaway No Button */
+    .button-group {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      min-height: 120px;
+      position: relative;
+    }
+    .btn {
+      padding: 13px 26px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .btn-yes {
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(201, 24, 74, 0.35);
+    }
+    .btn-no {
+      background: #e9ecef;
+      color: #6c757d;
+      position: relative;
+      user-select: none;
+    }
+
+    /* Screen 4: Celebration */
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .wa-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 14px;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s;
+    }
+    .wa-button:active {
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- SCREEN 1 -->
+    <div id="screen1" class="screen active">
+      <div class="card">
+        <h1>I Have a Message For You</h1>
+        <p>I know I messed up, and I really want to talk to you...</p>
+        <div class="envelope-box" onclick="goToScreen(2)">
+          <div class="wax-seal">💌</div>
+        </div>
+        <p style="font-size: 13px; color: #999;">(Tap the envelope to open)</p>
+      </div>
+    </div>
+
+    <!-- SCREEN 2 -->
+    <div id="screen2" class="screen">
+      <div class="card">
+        <div class="bear-avatar">🥺💧</div>
+        <h1>I'm Truly Sorry</h1>
+        <p>I hate that I upset you. You mean the world to me, and I promise to be better and listen to you.</p>
+        
+        <p style="font-size: 13px; font-weight: bold; margin-bottom: 6px; color: var(--primary);">Tap to claim your Peace Offerings:</p>
+        <div class="vouchers">
+          <div class="voucher" onclick="claimVoucher(this, 'Unlimited Hugs')">🤗 Unlimited Warm Hugs</div>
+          <div class="voucher" onclick="claimVoucher(this, 'Snack/Ice Cream Treat')">🍦 Treat on Me</div>
+          <div class="voucher" onclick="claimVoucher(this, 'Movie Choice Pass')">🎬 You Pick The Movie</div>
+          <div class="voucher" onclick="claimVoucher(this, 'You Were Right Pass')">👑 You Were Right!</div>
+        </div>
+
+        <button class="btn btn-yes" onclick="goToScreen(3)">Next ➔</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 3 -->
+    <div id="screen3" class="screen">
+      <div class="card" id="noZone">
+        <div style="font-size: 54px; margin-bottom: 10px;">👉👈</div>
+        <h1>Can you forgive me?</h1>
+        <p id="pleaText">Please? I promise to make it up to you!</p>
+        
+        <div class="button-group">
+          <button id="yesBtn" class="btn btn-yes" onclick="celebrate()">Yes ❤️</button>
+          <button id="noBtn" class="btn btn-no" onmouseover="dodgeNo()" onclick="dodgeNo()">No</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4 -->
+    <div id="screen4" class="screen">
+      <div class="card">
+        <div style="font-size: 64px; margin-bottom: 10px;">🎉💖🥰</div>
+        <h1>Yay! Thank You!</h1>
+        <p>You just made my entire world 100x brighter. I love you so much and won't let you down!</p>
+        <div id="claimedSummary" style="font-size: 13px; background: #fff0f3; padding: 10px; border-radius: 12px; margin-bottom: 14px;"></div>
+        <a id="whatsappShare" href="#" class="wa-button">Send "I Forgive You" on WhatsApp 💬</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const claimedItems = [];
+    let noClickCount = 0;
+    const pleaQuotes = [
+      "Wait, don't press that! 🥺",
+      "Are you 100% sure? Look at my sad face... 💔",
+      "Come on, give your favorite person another chance! 🧁",
+      "I will order your favorite food right now! 🍕",
+      "The button literally refuses to let you say no! 🙈"
+    ];
+
+    function playTone(freq, duration) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function goToScreen(num) {
+      playTone(523.25, 0.2); // C5
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen' + num).classList.add('active');
+    }
+
+    function claimVoucher(el, item) {
+      if (!claimedItems.includes(item)) {
+        claimedItems.push(item);
+        el.classList.add('claimed');
+        el.innerHTML = "✅ " + item;
+        playTone(659.25, 0.25); // E5
+      }
+    }
+
+    function dodgeNo() {
+      const noBtn = document.getElementById('noBtn');
+      const yesBtn = document.getElementById('yesBtn');
+      const pleaText = document.getElementById('pleaText');
+
+      noClickCount++;
+      playTone(280 + noClickCount * 40, 0.15);
+
+      // Change text
+      pleaText.innerText = pleaQuotes[noClickCount % pleaQuotes.length];
+
+      // Grow Yes button
+      const currentScale = 1 + (noClickCount * 0.18);
+      yesBtn.style.transform = `scale(${currentScale})`;
+
+      // Teleport No button
+      const randomX = (Math.random() - 0.5) * 160;
+      const randomY = (Math.random() - 0.5) * 90;
+      noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    function celebrate() {
+      goToScreen(4);
+      playTone(880, 0.5);
+
+      // Setup WhatsApp reply link
+      let text = "Okay fine, I forgive you! ❤️\n\nI also claimed these:\n" + (claimedItems.length > 0 ? claimedItems.map(i => "• " + i).join("\n") : "• Free cuddles!");
+      const waLink = "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
+      document.getElementById('whatsappShare').href = waLink;
+
+      document.getElementById('claimedSummary').innerHTML = claimedItems.length > 0 
+        ? "<strong>Your Claimed Vouchers:</strong><br>" + claimedItems.join("<br>")
+        : "<strong>Voucher Claimed:</strong> Unlimited warm hugs!";
+
+      // Confetti burst
+      for (let i = 0; i < 40; i++) {
+        createConfetti();
+      }
+    }
+
+    function createConfetti() {
+      const conf = document.createElement('div');
+      conf.classList.add('confetti');
+      conf.innerText = ['❤️', '✨', '🌸', '💖', '🎉'][Math.floor(Math.random() * 5)];
+      conf.style.left = Math.random() * 100 + 'vw';
+      conf.style.top = '-20px';
+      conf.style.fontSize = (Math.random() * 20 + 16) + 'px';
+      conf.style.transition = 'all ' + (Math.random() * 2 + 2) + 's ease-in';
+      document.body.appendChild(conf);
+
+      setTimeout(() => {
+        conf.style.top = '105vh';
+        conf.style.transform = `rotate(${Math.random() * 360}deg)`;
+      }, 50);
+
+      setTimeout(() => conf.remove(), 4000);
+    }
+  </script>
+</body>
+</html>

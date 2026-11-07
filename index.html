@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>I am so sorry ❤️</title>
+  <title>For My Kuchu ❤️</title>
   <style>
     :root {
       --bg: #fff0f3;
       --primary: #ff4d6d;
       --primary-dark: #c9184a;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.95);
       --text: #590d22;
       --accent: #ffb3c1;
     }
@@ -37,45 +37,56 @@
     }
     .screen {
       display: none;
-      animation: fadeIn 0.5s ease-out forwards;
+      animation: fadeIn 0.4s ease-out forwards;
     }
     .screen.active {
       display: block;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
       border-radius: 28px;
-      padding: 30px 22px;
-      box-shadow: 0 16px 40px rgba(255, 77, 109, 0.18);
-      border: 2px solid #fff;
+      padding: 26px 20px;
+      box-shadow: 0 16px 40px rgba(255, 77, 109, 0.2);
+      border: 2px solid #ffffff;
       text-align: center;
       position: relative;
     }
     h1 {
-      font-size: 26px;
+      font-size: 24px;
       color: var(--primary-dark);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     p {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.55;
       color: #722638;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      display: inline-block;
+      background: #ffe3e8;
+      color: var(--primary-dark);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
     }
 
     /* Screen 1: Envelope */
     .envelope-box {
       cursor: pointer;
-      margin: 30px auto;
-      width: 190px;
-      height: 130px;
+      margin: 24px auto;
+      width: 180px;
+      height: 120px;
       background: #ff758f;
-      border-radius: 12px;
+      border-radius: 14px;
       position: relative;
       box-shadow: 0 12px 28px rgba(201, 24, 74, 0.25);
       display: flex;
@@ -83,12 +94,12 @@
       justify-content: center;
       transition: transform 0.2s;
     }
-    .envelope-box:hover, .envelope-box:active {
-      transform: scale(1.05);
+    .envelope-box:active {
+      transform: scale(0.96);
     }
     .wax-seal {
-      width: 54px;
-      height: 54px;
+      width: 52px;
+      height: 52px;
       background: radial-gradient(circle, #ff0054, #800f2f);
       border-radius: 50%;
       display: flex;
@@ -96,80 +107,139 @@
       justify-content: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       animation: pulse 1.6s infinite ease-in-out;
+      font-size: 24px;
     }
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      50% { transform: scale(1.08); }
     }
 
-    /* Screen 2: Mascot & Vouchers */
-    .bear-avatar {
-      font-size: 64px;
-      margin-bottom: 8px;
-      display: inline-block;
-      animation: sway 2.5s infinite ease-in-out;
+    /* Floating Little Hearts */
+    .floating-hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
     }
-    @keyframes sway {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(5deg); }
+    .heart-float {
+      position: absolute;
+      bottom: -20px;
+      font-size: 16px;
+      opacity: 0.6;
+      animation: floatUp 5s linear infinite;
     }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      20% { opacity: 0.7; }
+      100% { transform: translateY(-380px) scale(1.2); opacity: 0; }
+    }
+
+    /* Reasons List */
+    .reasons-list {
+      text-align: left;
+      background: #fff5f7;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .reason-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #590d22;
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+    .reason-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Treat & Voucher Cards */
     .vouchers {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin: 18px 0;
+      margin: 16px 0;
     }
     .voucher {
-      background: #fff;
+      background: #ffffff;
       border: 1.5px dashed var(--primary);
       border-radius: 14px;
       padding: 12px 8px;
       cursor: pointer;
       transition: all 0.2s;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       color: var(--primary-dark);
       box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      user-select: none;
+    }
+    .voucher:active {
+      transform: scale(0.95);
     }
     .voucher.claimed {
       background: #ffe3e8;
       border-style: solid;
-      transform: scale(0.97);
+      border-color: #ff4d6d;
+      transform: scale(0.98);
+      color: #a4133c;
     }
 
-    /* Screen 3: Runaway No Button */
-    .button-group {
-      margin-top: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-      min-height: 120px;
-      position: relative;
-    }
+    /* Buttons */
     .btn {
       padding: 13px 26px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       outline: none;
-      transition: transform 0.15s ease, background 0.2s;
+      transition: background 0.2s, transform 0.15s ease;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .btn-yes {
       background: linear-gradient(135deg, #ff4d6d, #c9184a);
       color: #fff;
       box-shadow: 0 8px 20px rgba(201, 24, 74, 0.35);
     }
-    .btn-no {
-      background: #e9ecef;
-      color: #6c757d;
-      position: relative;
-      user-select: none;
+    .btn-yes:active {
+      transform: scale(0.96);
     }
 
-    /* Screen 4: Celebration */
+    /* Question Screen Dodge Zone */
+    .dodge-container {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      overflow: hidden;
+      border-radius: 16px;
+      background: rgba(255, 235, 238, 0.4);
+    }
+    #yesBtn {
+      position: static;
+      z-index: 10;
+    }
+    #noBtn {
+      position: absolute;
+      background: #e9ecef;
+      color: #6c757d;
+      z-index: 20;
+      white-space: nowrap;
+      transition: transform 0.18s ease-out, left 0.18s ease-out, top 0.18s ease-out;
+    }
+
+    /* Celebration Screen */
     .confetti {
       position: fixed;
       pointer-events: none;
@@ -182,10 +252,10 @@
       background: #25D366;
       color: white;
       text-decoration: none;
-      padding: 14px 28px;
+      padding: 14px 24px;
       border-radius: 50px;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15px;
       margin-top: 14px;
       box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
       transition: transform 0.2s;
@@ -196,59 +266,92 @@
   </style>
 </head>
 <body>
+
+  <!-- Floating animated hearts in the background -->
+  <div class="floating-hearts" id="heartsBg"></div>
+
   <div class="container">
-    <!-- SCREEN 1 -->
+    <!-- SCREEN 1: ENVELOPE OPENING -->
     <div id="screen1" class="screen active">
       <div class="card">
-        <h1>I Have a Message For You</h1>
-        <p>I know I messed up, and I really want to talk to you...</p>
+        <span class="badge">A CONFIDENTIAL LETTER 💌</span>
+        <h1>Special Delivery for Kuchu</h1>
+        <p>Someone who adores you more than anything made a little mistake and has something very important to say...</p>
         <div class="envelope-box" onclick="goToScreen(2)">
-          <div class="wax-seal">💌</div>
+          <div class="wax-seal">❤️</div>
         </div>
-        <p style="font-size: 13px; color: #999;">(Tap the envelope to open)</p>
+        <p style="font-size: 13px; color: #a4133c; font-weight: 600;">(Tap the seal to open, Kuchu)</p>
       </div>
     </div>
 
-    <!-- SCREEN 2 -->
+    <!-- SCREEN 2: HEARTFELT APOLOGY & PROMISES -->
     <div id="screen2" class="screen">
       <div class="card">
-        <div class="bear-avatar">🥺💧</div>
-        <h1>I'm Truly Sorry</h1>
-        <p>I hate that I upset you. You mean the world to me, and I promise to be better and listen to you.</p>
+        <div style="font-size: 58px; margin-bottom: 8px;">🥺🌧️</div>
+        <h1>I'm Really Sorry, Kuchu</h1>
+        <p>I hate seeing you upset, especially when it is because of me. You are my favorite person in the entire universe.</p>
         
-        <p style="font-size: 13px; font-weight: bold; margin-bottom: 6px; color: var(--primary);">Tap to claim your Peace Offerings:</p>
-        <div class="vouchers">
-          <div class="voucher" onclick="claimVoucher(this, 'Unlimited Hugs')">🤗 Unlimited Warm Hugs</div>
-          <div class="voucher" onclick="claimVoucher(this, 'Snack/Ice Cream Treat')">🍦 Treat on Me</div>
-          <div class="voucher" onclick="claimVoucher(this, 'Movie Choice Pass')">🎬 You Pick The Movie</div>
-          <div class="voucher" onclick="claimVoucher(this, 'You Were Right Pass')">👑 You Were Right!</div>
+        <div class="reasons-list">
+          <div class="reason-item">
+            <span>✨</span>
+            <span><strong>I hear you:</strong> Your feelings matter to me the most, and I'll listen more patiently.</span>
+          </div>
+          <div class="reason-item">
+            <span>🤍</span>
+            <span><strong>I promise:</strong> To never let misunderstandings dim that cute smile of yours.</span>
+          </div>
+          <div class="reason-item">
+            <span>🧸</span>
+            <span><strong>Truth is:</strong> My day doesn't feel right until everything is okay between us.</span>
+          </div>
         </div>
 
-        <button class="btn btn-yes" onclick="goToScreen(3)">Next ➔</button>
+        <button class="btn btn-yes" onclick="goToScreen(3)">See Your Peace Offerings ➔</button>
       </div>
     </div>
 
-    <!-- SCREEN 3 -->
+    <!-- SCREEN 3: EXCLUSIVE TREATS & VOUCHERS -->
     <div id="screen3" class="screen">
-      <div class="card" id="noZone">
-        <div style="font-size: 54px; margin-bottom: 10px;">👉👈</div>
-        <h1>Can you forgive me?</h1>
-        <p id="pleaText">Please? I promise to make it up to you!</p>
+      <div class="card">
+        <span class="badge">OFFICIAL PEACE TREATS 🎁</span>
+        <h1>Treats for My Kuchu</h1>
+        <p>Tap each coupon below to redeem your personal compensation package:</p>
         
-        <div class="button-group">
-          <button id="yesBtn" class="btn btn-yes" onclick="celebrate()">Yes ❤️</button>
-          <button id="noBtn" class="btn btn-no" onmouseover="dodgeNo()" onclick="dodgeNo()">No</button>
+        <div class="vouchers">
+          <div class="voucher" onclick="claimVoucher(this, 'Unlimited Tight Hugs')">🤗 Unlimited Warm Hugs</div>
+          <div class="voucher" onclick="claimVoucher(this, 'Favorite Food & Ice Cream Treat')">🍦 Midnight Treat on Me</div>
+          <div class="voucher" onclick="claimVoucher(this, 'Movie & Snacks Controller')">🎬 You Pick The Movie</div>
+          <div class="voucher" onclick="claimVoucher(this, 'Master of Every Argument Pass')">👑 You Were Right (Always)</div>
+          <div class="voucher" onclick="claimVoucher(this, 'Long Cute Late-night Call')">🌙 Endless Late Night Call</div>
+          <div class="voucher" onclick="claimVoucher(this, 'Zero-Questions Sweet Pampering')">💆 Head Massages & Pamper</div>
         </div>
+
+        <p style="font-size: 12px; color: #a4133c; margin-bottom: 12px;">(Select as many as you want, they never expire!)</p>
+        <button class="btn btn-yes" onclick="goToScreen(4)">One Last Question ➔</button>
       </div>
     </div>
 
-    <!-- SCREEN 4 -->
+    <!-- SCREEN 4: RUNAWAY NO BUTTON (DOES NOT GET STUCK) -->
     <div id="screen4" class="screen">
       <div class="card">
-        <div style="font-size: 64px; margin-bottom: 10px;">🎉💖🥰</div>
-        <h1>Yay! Thank You!</h1>
-        <p>You just made my entire world 100x brighter. I love you so much and won't let you down!</p>
-        <div id="claimedSummary" style="font-size: 13px; background: #fff0f3; padding: 10px; border-radius: 12px; margin-bottom: 14px;"></div>
+        <div style="font-size: 50px; margin-bottom: 8px;">👉👈</div>
+        <h1>Will You Forgive Me, Kuchu?</h1>
+        <p id="pleaText">Look at my puppy eyes... Can we be best friends again?</p>
+        
+        <div class="dodge-container" id="dodgeArea">
+          <button id="yesBtn" class="btn btn-yes" onclick="celebrate()">Yes, I Forgive You ❤️</button>
+          <button id="noBtn" class="btn">No 😤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: CELEBRATION & WHATSAPP ACTION -->
+    <div id="screen5" class="screen">
+      <div class="card">
+        <div style="font-size: 60px; margin-bottom: 8px;">🎉💖🥰</div>
+        <h1>Yay! I Love You Kuchu!</h1>
+        <p>You just saved my entire day. I promise to take the best care of you forever!</p>
+        <div id="claimedSummary" style="font-size: 13px; background: #fff0f3; padding: 12px; border-radius: 14px; margin-bottom: 14px; text-align: left; line-height: 1.5;"></div>
         <a id="whatsappShare" href="#" class="wa-button">Send "I Forgive You" on WhatsApp 💬</a>
       </div>
     </div>
@@ -256,15 +359,28 @@
 
   <script>
     const claimedItems = [];
-    let noClickCount = 0;
+    let dodgeCount = 0;
     const pleaQuotes = [
-      "Wait, don't press that! 🥺",
-      "Are you 100% sure? Look at my sad face... 💔",
-      "Come on, give your favorite person another chance! 🧁",
-      "I will order your favorite food right now! 🍕",
-      "The button literally refuses to let you say no! 🙈"
+      "Wait, don't tap that! 🥺",
+      "Kuchu please! Look at how sorry I am... 💔",
+      "The button refuses to let you stay mad! 🙈",
+      "I will get you your favorite snacks right now! 🍫",
+      "Nope, 'No' is physically not an option for Kuchu! ✨"
     ];
 
+    // Background floating hearts
+    const heartsBg = document.getElementById('heartsBg');
+    for (let i = 0; i < 14; i++) {
+      const h = document.createElement('div');
+      h.className = 'heart-float';
+      h.innerText = ['❤️', '💖', '🌸', '✨', '🤍'][Math.floor(Math.random() * 5)];
+      h.style.left = (Math.random() * 100) + '%';
+      h.style.animationDelay = (Math.random() * 4) + 's';
+      h.style.animationDuration = (3.5 + Math.random() * 3) + 's';
+      heartsBg.appendChild(h);
+    }
+
+    // Audio tone generator (zero external files required)
     function playTone(freq, duration) {
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -280,9 +396,13 @@
     }
 
     function goToScreen(num) {
-      playTone(523.25, 0.2); // C5
+      playTone(523.25, 0.2);
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen' + num).classList.add('active');
+
+      if (num === 4) {
+        initDodgeButton();
+      }
     }
 
     function claimVoucher(el, item) {
@@ -290,45 +410,75 @@
         claimedItems.push(item);
         el.classList.add('claimed');
         el.innerHTML = "✅ " + item;
-        playTone(659.25, 0.25); // E5
+        playTone(659.25, 0.2);
       }
     }
 
-    function dodgeNo() {
+    // Continuous runaway mechanism for the 'No' button
+    function moveNoButton() {
+      const dodgeArea = document.getElementById('dodgeArea');
       const noBtn = document.getElementById('noBtn');
-      const yesBtn = document.getElementById('yesBtn');
       const pleaText = document.getElementById('pleaText');
 
-      noClickCount++;
-      playTone(280 + noClickCount * 40, 0.15);
+      dodgeCount++;
+      playTone(280 + (dodgeCount % 6) * 40, 0.1);
 
-      // Change text
-      pleaText.innerText = pleaQuotes[noClickCount % pleaQuotes.length];
+      pleaText.innerText = pleaQuotes[dodgeCount % pleaQuotes.length];
 
-      // Grow Yes button
-      const currentScale = 1 + (noClickCount * 0.18);
-      yesBtn.style.transform = `scale(${currentScale})`;
+      // Calculate container boundary to ensure it continuously dodges inside container
+      const areaRect = dodgeArea.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
 
-      // Teleport No button
-      const randomX = (Math.random() - 0.5) * 160;
-      const randomY = (Math.random() - 0.5) * 90;
-      noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      const maxX = areaRect.width - btnRect.width - 16;
+      const maxY = areaRect.height - btnRect.height - 16;
+
+      const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+      const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+
+      noBtn.style.left = randomX + 'px';
+      noBtn.style.top = randomY + 'px';
+    }
+
+    function initDodgeButton() {
+      const noBtn = document.getElementById('noBtn');
+      const dodgeArea = document.getElementById('dodgeArea');
+
+      // Place No button initially to the right of Yes button
+      noBtn.style.left = '62%';
+      noBtn.style.top = '50%';
+      noBtn.style.transform = 'translateY(-50%)';
+
+      // Dodge on mouse hover, mouse enter, touch start, and pointer move
+      noBtn.onmouseenter = moveNoButton;
+      noBtn.onmouseover = moveNoButton;
+      noBtn.ontouchstart = (e) => { e.preventDefault(); moveNoButton(); };
+      noBtn.onclick = moveNoButton;
+
+      // Proximity detection: if cursor gets close inside container, run away immediately
+      dodgeArea.onmousemove = (e) => {
+        const btnRect = noBtn.getBoundingClientRect();
+        const dist = Math.hypot(e.clientX - (btnRect.left + btnRect.width / 2), e.clientY - (btnRect.top + btnRect.height / 2));
+        if (dist < 60) {
+          moveNoButton();
+        }
+      };
     }
 
     function celebrate() {
-      goToScreen(4);
+      goToScreen(5);
       playTone(880, 0.5);
 
-      // Setup WhatsApp reply link
-      let text = "Okay fine, I forgive you! ❤️\n\nI also claimed these:\n" + (claimedItems.length > 0 ? claimedItems.map(i => "• " + i).join("\n") : "• Free cuddles!");
+      let text = "Okay fine, I forgive you! ❤️\n\nI, Kuchu, claimed these peace offerings from you:\n" + 
+        (claimedItems.length > 0 ? claimedItems.map(i => "• " + i).join("\n") : "• Unlimited warm cuddles & pampering!");
+      
       const waLink = "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
       document.getElementById('whatsappShare').href = waLink;
 
       document.getElementById('claimedSummary').innerHTML = claimedItems.length > 0 
-        ? "<strong>Your Claimed Vouchers:</strong><br>" + claimedItems.join("<br>")
-        : "<strong>Voucher Claimed:</strong> Unlimited warm hugs!";
+        ? "<strong>Kuchu's Claimed Offers:</strong><br>" + claimedItems.map(i => "• " + i).join("<br>")
+        : "<strong>Offer Claimed:</strong> • Unlimited warm hugs & full-day pampering!";
 
-      // Confetti burst
+      // Heart confetti explosion
       for (let i = 0; i < 40; i++) {
         createConfetti();
       }
@@ -337,7 +487,7 @@
     function createConfetti() {
       const conf = document.createElement('div');
       conf.classList.add('confetti');
-      conf.innerText = ['❤️', '✨', '🌸', '💖', '🎉'][Math.floor(Math.random() * 5)];
+      conf.innerText = ['❤️', '✨', '🌸', '💖', '🎉', '🍫'][Math.floor(Math.random() * 6)];
       conf.style.left = Math.random() * 100 + 'vw';
       conf.style.top = '-20px';
       conf.style.fontSize = (Math.random() * 20 + 16) + 'px';

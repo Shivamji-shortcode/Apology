@@ -249,9 +249,16 @@
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
     }
 
-    /* Buttons */
+    /* Action Buttons */
+    .btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
     .btn {
-      padding: 13px 26px;
+      padding: 13px 24px;
       font-size: 15px;
       font-weight: 700;
       border: none;
@@ -270,13 +277,27 @@
     .btn-yes:active {
       transform: scale(0.96) !important;
     }
+    .btn-back {
+      background: #f1f3f5;
+      color: #631429;
+      border: 1px solid #e2e6ea;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s ease;
+    }
+    .btn-back:active {
+      transform: scale(0.96);
+    }
 
     /* Dodge Area for No button */
     .dodge-zone {
       position: relative;
       width: 100%;
       height: 180px;
-      margin-top: 15px;
+      margin: 15px 0 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -362,11 +383,14 @@
         </div>
 
         <p>Before we move forward, there is a universal calculation you need to see...</p>
-        <button class="btn btn-yes" onclick="goToScreen(3)">Check The Calculation ➔</button>
+        <div class="btn-row">
+          <button class="btn btn-back" onclick="goToScreen(1)">⬅️ Back</button>
+          <button class="btn btn-yes" onclick="goToScreen(3)">Check The Calculation ➔</button>
+        </div>
       </div>
     </div>
 
-    <!-- SCREEN 3: I LOVE YOU INFINITE TIMES PAGE (NEW) -->
+    <!-- SCREEN 3: I LOVE YOU INFINITE TIMES PAGE -->
     <div id="screen3" class="screen">
       <div class="card">
         <span class="badge">♾️ SCIENTIFICALLY CALCULATED ♾️</span>
@@ -381,11 +405,14 @@
 
         <p style="font-size: 14px;">Even if I wrote it down every second of every day on every diya in the world, it would still not be enough to show how much I love you.</p>
         
-        <button class="btn btn-yes" onclick="goToScreen(4)">Read My Apology ➔</button>
+        <div class="btn-row">
+          <button class="btn btn-back" onclick="goToScreen(2)">⬅️ Back</button>
+          <button class="btn btn-yes" onclick="goToScreen(4)">Read My Apology ➔</button>
+        </div>
       </div>
     </div>
 
-    <!-- SCREEN 4: HEARTFELT DIWALI APOLOGY (UPDATED) -->
+    <!-- SCREEN 4: HEARTFELT DIWALI APOLOGY -->
     <div id="screen4" class="screen">
       <div class="card">
         <div style="font-size: 50px; margin-bottom: 8px;">🥺🪔💔</div>
@@ -407,7 +434,10 @@
           </div>
         </div>
 
-        <button class="btn btn-yes" onclick="goToScreen(5)">See Kuchu's Diwali Treats ➔</button>
+        <div class="btn-row">
+          <button class="btn btn-back" onclick="goToScreen(3)">⬅️ Back</button>
+          <button class="btn btn-yes" onclick="goToScreen(5)">See Kuchu's Treats ➔</button>
+        </div>
       </div>
     </div>
 
@@ -427,7 +457,10 @@
           <div class="treat-card" onclick="claimTreat(this, 'Full-Day Queen Treatment & Pampering')">💆 Zero-Questions Pamper</div>
         </div>
 
-        <button class="btn btn-yes" onclick="goToScreen(6)">One Last Question ➔</button>
+        <div class="btn-row">
+          <button class="btn btn-back" onclick="goToScreen(4)">⬅️ Back</button>
+          <button class="btn btn-yes" onclick="goToScreen(6)">One Last Question ➔</button>
+        </div>
       </div>
     </div>
 
@@ -442,6 +475,8 @@
           <button id="yesBtn" class="btn btn-yes" onclick="celebrate()">Yes, Happy Diwali! ❤️</button>
           <button id="noBtn" class="btn">No 😤</button>
         </div>
+
+        <button class="btn btn-back" style="margin-top: 8px;" onclick="goToScreen(5)">⬅️ Back to Treats</button>
       </div>
     </div>
 

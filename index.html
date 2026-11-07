@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Happy Diwali & I'm Sorry Kuchu 🪔❤️</title>
+  <title>Happy Diwali & I'm Sorry Kuchu 🪔✨</title>
   <style>
     :root {
       --primary: #ff2a5f;
       --primary-dark: #a10028;
       --gold: #ffbe0b;
       --gold-dark: #d48b00;
-      --bg-gradient: radial-gradient(circle at top, #2b0914 0%, #150208 100%);
       --card-bg: rgba(255, 255, 255, 0.96);
       --text: #3d0313;
     }
@@ -22,7 +21,7 @@
       -webkit-tap-highlight-color: transparent;
     }
     body {
-      background: var(--bg-gradient);
+      background: radial-gradient(circle at top, #2d0515 0%, #0d0107 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -32,6 +31,18 @@
       padding: 16px;
       position: relative;
     }
+
+    /* Fireworks Canvas Background */
+    #fireworksCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
     .container {
       width: 100%;
       max-width: 440px;
@@ -54,7 +65,7 @@
       backdrop-filter: blur(14px);
       border-radius: 28px;
       padding: 26px 20px;
-      box-shadow: 0 18px 50px rgba(255, 190, 11, 0.22);
+      box-shadow: 0 18px 50px rgba(255, 190, 11, 0.28);
       border: 2px solid #ffe8d6;
       text-align: center;
       position: relative;
@@ -85,7 +96,7 @@
       margin-bottom: 16px;
     }
 
-    /* Screen 1: Envelope with Diya Glow */
+    /* Envelope with Diya Wax Seal */
     .envelope-box {
       cursor: pointer;
       margin: 20px auto 14px;
@@ -104,8 +115,8 @@
       transform: scale(0.95);
     }
     .wax-seal {
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
       background: radial-gradient(circle, #ffbe0b, #d48b00);
       border-radius: 50%;
       display: flex;
@@ -113,7 +124,7 @@
       justify-content: center;
       box-shadow: 0 0 20px rgba(255, 190, 11, 0.8);
       animation: diyaGlow 1.8s infinite ease-in-out;
-      font-size: 26px;
+      font-size: 28px;
       border: 2px solid #fff;
     }
     @keyframes diyaGlow {
@@ -121,7 +132,41 @@
       50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(255, 190, 11, 1); }
     }
 
-    /* Promises List */
+    /* Diya Wish Display */
+    .diya-display {
+      font-size: 46px;
+      margin: 10px 0 16px;
+      letter-spacing: 12px;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(255, 190, 11, 0.7)); }
+      50% { transform: scale(1.05); filter: drop-shadow(0 0 16px rgba(255, 190, 11, 1)); }
+    }
+    .diya-banner {
+      background: linear-gradient(135deg, #fff3cd, #ffe8a1);
+      border: 1.5px solid #ffd460;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .diya-banner h3 {
+      font-size: 15px;
+      color: #7a4b00;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .diya-banner p {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #553300;
+      margin-bottom: 0;
+    }
+
+    /* Promises Box */
     .promises-list {
       text-align: left;
       background: #fff8f0;
@@ -196,7 +241,7 @@
       transform: scale(0.96) !important;
     }
 
-    /* Dodge Area */
+    /* Dodge Area for No button */
     .dodge-zone {
       position: relative;
       width: 100%;
@@ -247,28 +292,7 @@
       transform: scale(0.96);
     }
 
-    /* Background Floating Sparkles & Diyas */
-    .sparkle-layer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-    .floating-sparkle {
-      position: absolute;
-      bottom: -20px;
-      animation: floatSparkle 5s linear infinite;
-      opacity: 0.7;
-    }
-    @keyframes floatSparkle {
-      0% { transform: translateY(0) scale(0.7); opacity: 0; }
-      20% { opacity: 0.8; }
-      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-    }
+    /* Confetti */
     .confetti-piece {
       position: fixed;
       pointer-events: none;
@@ -278,15 +302,16 @@
 </head>
 <body>
 
-  <div class="sparkle-layer" id="sparkleBg"></div>
+  <!-- Real Fireworks Animated Canvas -->
+  <canvas id="fireworksCanvas"></canvas>
 
   <div class="container">
-    <!-- PAGE 1: DIWALI ENVELOPE -->
+    <!-- SCREEN 1: ENVELOPE -->
     <div id="screen1" class="screen active">
       <div class="card">
         <span class="badge">🪔 A Special Diwali Message 🪔</span>
-        <h1>Happy Diwali, My Kuchu ✨</h1>
-        <p>Diwali is all about light, happiness, and sweets... yet I ended up hurting you and dimming your festival. I am so sorry, Kuchu. I made this just for you...</p>
+        <h1>Special Delivery for Kuchu</h1>
+        <p>Diwali is a festival of lights and smiles, but I ended up upsetting you. I cannot let Diwali pass without making things right between us...</p>
         <div class="envelope-box" onclick="goToScreen(2)">
           <div class="wax-seal">🪔</div>
         </div>
@@ -294,58 +319,75 @@
       </div>
     </div>
 
-    <!-- PAGE 2: HEARTFELT DIWALI APOLOGY -->
+    <!-- SCREEN 2: DEDICATED DIWALI WISH PAGE -->
     <div id="screen2" class="screen">
       <div class="card">
-        <div style="font-size: 52px; margin-bottom: 8px;">🪔🥺💔</div>
-        <h1>I'm So Sorry For Ruining Your Mood, Kuchu</h1>
-        <p>You deserve all the joy, sparklers, and laughter this Diwali, not sadness because of me. My Diwali has zero light without my Kuchu smiling.</p>
+        <span class="badge">✨ FESTIVE BLESSINGS ✨</span>
+        <h1>Happy Diwali, My Kuchu! 🪔</h1>
+        <div class="diya-display">🪔 ✨ 🪔</div>
+        
+        <div class="diya-banner">
+          <h3>🌟 Wishing You Infinite Smiles</h3>
+          <p>May this festival bring you endless laughter, warmth, gorgeous traditional outfits, and sweet moments. You are the brightest light in my life, Kuchu.</p>
+        </div>
+
+        <p>Before the celebrations begin, there is something very heartfelt I need to say to you...</p>
+        <button class="btn btn-yes" onclick="goToScreen(3)">Read My Apology ➔</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: HEARTFELT DIWALI APOLOGY -->
+    <div id="screen3" class="screen">
+      <div class="card">
+        <div style="font-size: 50px; margin-bottom: 8px;">🥺🪔💔</div>
+        <h1>I'm So Sorry For Upsetting You</h1>
+        <p>I hate that I dimmed your festive mood on such a special day. Having you angry with me makes the whole festival feel incomplete.</p>
         
         <div class="promises-list">
           <div class="promise-row">
             <span>✨</span>
-            <span><strong>My Biggest Regret:</strong> Upsetting you during Diwali is the last thing I ever wanted to do. I hate that I made you sad.</span>
+            <span><strong>My Honest Regret:</strong> Ruining your mood on Diwali breaks my heart. I promise to be far more understanding and gentle with you.</span>
           </div>
           <div class="promise-row">
             <span>🪔</span>
-            <span><strong>Festive Promise:</strong> I promise to be softer, listen closely to you, and always put your feelings first.</span>
+            <span><strong>Zero Ego:</strong> Kuchu's smile is 100 times more important to me than winning any disagreement.</span>
           </div>
           <div class="promise-row">
             <span>🤍</span>
-            <span><strong>You're My Light:</strong> No fireworks or lights match the sparkle of your smile. Let me make it up to you?</span>
+            <span><strong>You're My Light:</strong> No diya or firework sparkles brighter than your smile. Let me make it up to you?</span>
           </div>
         </div>
 
-        <button class="btn btn-yes" onclick="goToScreen(3)">See Your Diwali Compensation ➔</button>
+        <button class="btn btn-yes" onclick="goToScreen(4)">See Kuchu's Diwali Treats ➔</button>
       </div>
     </div>
 
-    <!-- PAGE 3: DIWALI TREATS & COUPONS -->
-    <div id="screen3" class="screen">
+    <!-- SCREEN 4: DIWALI SPECIAL TREATS & COUPONS -->
+    <div id="screen4" class="screen">
       <div class="card">
         <span class="badge">🎁 Kuchu's Diwali Special Treats</span>
         <h1>Peace Treats For Kuchu</h1>
-        <p>Tap each coupon below to claim your personalized festive pampering package (claim all of them!):</p>
+        <p>Tap each coupon below to claim your Diwali peace package (claim all of them, they never expire!):</p>
         
         <div class="treats-grid">
-          <div class="treat-card" onclick="claimTreat(this, 'Box of Kuchu\\'s Favorite Mithai / Kaju Katli')">🍬 Favorite Sweets on Me</div>
-          <div class="treat-card" onclick="claimTreat(this, 'Unlimited Tight Warm Hugs')">🤗 Warm Tight Hugs</div>
+          <div class="treat-card" onclick="claimTreat(this, 'Box of Kuchu\\'s Favorite Sweets / Kaju Katli')">🍬 Favorite Sweets on Me</div>
+          <div class="treat-card" onclick="claimTreat(this, 'Unlimited Warm Tight Hugs')">🤗 Warm Tight Hugs</div>
           <div class="treat-card" onclick="claimTreat(this, 'Personal Late-Night Fairy Lights Call')">🌙 Late-Night Festive Call</div>
           <div class="treat-card" onclick="claimTreat(this, 'Kuchu Was Right (Diwali Edition)')">👑 Kuchu Is Always Right</div>
           <div class="treat-card" onclick="claimTreat(this, 'Exclusive Ice Cream & Post-Diwali Date')">🍦 Post-Diwali Food Date</div>
           <div class="treat-card" onclick="claimTreat(this, 'Full-Day Queen Treatment & Pampering')">💆 Zero-Questions Pamper</div>
         </div>
 
-        <button class="btn btn-yes" onclick="goToScreen(4)">One Last Question ➔</button>
+        <button class="btn btn-yes" onclick="goToScreen(5)">One Last Question ➔</button>
       </div>
     </div>
 
-    <!-- PAGE 4: RUNAWAY NO BUTTON (DOES NOT FREEZE) -->
-    <div id="screen4" class="screen">
+    <!-- SCREEN 5: RUNAWAY NO BUTTON -->
+    <div id="screen5" class="screen">
       <div class="card">
         <div style="font-size: 50px; margin-bottom: 8px;">👉👈</div>
         <h1>Can You Forgive Me This Diwali, Kuchu?</h1>
-        <p id="pleaText">Don't stay mad on Diwali... let's celebrate together? 🪔✨</p>
+        <p id="pleaText">No staying angry on Diwali... let's celebrate together? 🪔✨</p>
         
         <div class="dodge-zone" id="dodgeZone">
           <button id="yesBtn" class="btn btn-yes" onclick="celebrate()">Yes, Happy Diwali! ❤️</button>
@@ -354,12 +396,12 @@
       </div>
     </div>
 
-    <!-- PAGE 5: CELEBRATION & WHATSAPP ACTION -->
-    <div id="screen5" class="screen">
+    <!-- SCREEN 6: CELEBRATION & WHATSAPP ACTION -->
+    <div id="screen6" class="screen">
       <div class="card">
         <div style="font-size: 58px; margin-bottom: 8px;">🎆🪔💖🎉</div>
         <h1>Happy Diwali, My Kuchu!</h1>
-        <p>Thank you for forgiving me! You just lit up my whole world. I love you so much and promise to bring you only smiles!</p>
+        <p>Thank you for forgiving me! You just lit up my whole Diwali. I love you so much and promise to bring you only happiness!</p>
         <div id="claimedSummary" style="font-size: 13px; background: #fff8f0; padding: 12px; border-radius: 14px; margin-bottom: 14px; text-align: left; line-height: 1.5; border: 1px solid #ffd8a8;"></div>
         <a id="whatsappShare" href="#" class="wa-button">Send "Happy Diwali & I Forgive You" 💬</a>
       </div>
@@ -378,18 +420,65 @@
       "Give me that pretty Diwali smile, please? 🥹"
     ];
 
-    // Background floating sparklers, diyas & hearts
-    const sparkleBg = document.getElementById('sparkleBg');
-    for (let i = 0; i < 18; i++) {
-      const h = document.createElement('div');
-      h.className = 'floating-sparkle';
-      h.innerText = ['🪔', '✨', '💛', '💖', '🎇', '🌸'][Math.floor(Math.random() * 6)];
-      h.style.left = (Math.random() * 100) + 'vw';
-      h.style.animationDelay = (Math.random() * 5) + 's';
-      h.style.animationDuration = (3.5 + Math.random() * 3) + 's';
-      h.style.fontSize = (14 + Math.random() * 12) + 'px';
-      sparkleBg.appendChild(h);
+    // Background Canvas Fireworks Animation
+    const canvas = document.getElementById('fireworksCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createFirework(x, y) {
+      const count = 35;
+      const colors = ['#ffbe0b', '#ff006e', '#8338ec', '#3a86ff', '#fb5607', '#ffbe0b'];
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 4 + 1.5;
+        particles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          decay: Math.random() * 0.02 + 0.015
+        });
+      }
+    }
+
+    function animateFireworks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (Math.random() < 0.06) {
+        createFirework(Math.random() * canvas.width, Math.random() * (canvas.height * 0.55));
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.04;
+        p.alpha -= p.decay;
+
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+      requestAnimationFrame(animateFireworks);
+    }
+    animateFireworks();
 
     // Built-in Web Audio
     function playChime(freq, duration) {
@@ -411,7 +500,7 @@
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen' + num).classList.add('active');
 
-      if (num === 4) {
+      if (num === 5) {
         initSmartDodge();
       }
     }
@@ -494,8 +583,12 @@
     }
 
     function celebrate() {
-      goToScreen(5);
+      goToScreen(6);
       playChime(880, 0.5);
+
+      for (let i = 0; i < 6; i++) {
+        createFirework(Math.random() * canvas.width, Math.random() * (canvas.height * 0.5));
+      }
 
       let text = "Happy Diwali! 🪔✨ Okay fine, I forgive you! ❤️\n\nI, Kuchu, claimed these Diwali treats from you:\n" + 
         (claimedTreats.length > 0 ? claimedTreats.map(i => "• " + i).join("\n") : "• Unlimited warm cuddles & Diwali sweets!");
